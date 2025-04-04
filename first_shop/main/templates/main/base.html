@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Магазин зоотоварів</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'main/css/base.css'%}" />
+  </head>
+  <body>
+    <header>
+      <img src="{% static 'main/images/logo.png' %}" width="180px" alt="logo" />
+      <div class="menu">
+        <nav>
+          <a href="">Головна</a>
+          <a href="">Категорії</a>
+          <a href="">Про нас</a>
+        </nav>
+      </div>
+      <img src="{% static 'main/images/card.png' %}" alt="Card" width="65px" />
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </footer>
+    {% block modals %}
+    {% endblock %}
+  </body>
+</html>
