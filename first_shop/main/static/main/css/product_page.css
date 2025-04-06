@@ -1,0 +1,29 @@
+.product_page {
+  width: 70%;
+  max-width: 1200px;
+}
+.product_wrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 60px;
+}
+.product_wrap .image {
+  flex: 1;
+  width: 100%;
+}
+.product_wrap .image img {
+  min-width: 100%;
+}
+.product_wrap .content_page {
+  flex: 1;
+}
+.product_wrap .title {
+  font-size: 24px;
+  text-align: start;
+}
+.product_wrap .price {
+  font-size: 28px;
+  font-weight: 700;
+}

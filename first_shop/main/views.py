@@ -14,7 +14,18 @@ def product_view(request: HttpRequest, slag):
     current_product = products[slag]
 
     context = {
-        'product': current_product
+        'product': current_product,
     }
 
-    return (request, 'main/product_view.html', context)
+    return render(request, 'main/product_view.html', context)
+
+def category_view(request: HttpRequest, slag):
+    current_category = categories[slag]
+
+    context = {
+        'category': current_category,
+        'products': products,
+        'categories': categories
+    }
+
+    return render(request, 'main/category_view.html', context)

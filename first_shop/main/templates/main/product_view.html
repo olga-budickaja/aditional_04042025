@@ -4,27 +4,35 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'main/css/index.css' %}" />
+<link rel="stylesheet" href="{% static 'main/css/product_page.css' %}" />
 <script src="{% static 'main/js/modal.js'%}" defer></script>
 {% endblock %}
 
-<div class="content">
-    <div class="product">
-      <a href="{% url 'product_view' slag=link %}">
-        {% if product.img %}
-        <img src="{{ product.img }}" alt="{{ product.name }}" class="img" />
-        {% else %}
-        <img
-          src="{% static 'main/images/no-image.webp' %}"
-          alt="{{ product.name }}"
-          class="img"
-        />
-        {% endif %}
-        <h3 class="name">{{ product.name }}</h3>
-      </a>
-      <p class="price">{{ product.price }} ₴</p>
-      <button class="btn">Купити</button>
-    </div>
+
+<div class="product_page">
+  <ul class="breadcrumbs">
+    <li><a href="{% url 'main' %}">Головна</a>/</li>
+    <li>{{product.name}}</li>
+  </ul>
+  <div class="product_wrap">
+      <div class="image">
+    {% if product.img %}
+    <img src="{{ product.img }}" alt="{{ product.name }}" class="img" />
+    {% else %}
+    <img
+      src="{% static 'main/images/no-image.webp' %}"
+      alt="{{ product.name }}"
+      class="img"
+    />
+    {% endif %}
   </div>
+  <div class="content_page">
+    <h1 class="title">{{ product.name }}</h1>
+    <p class="price">{{ product.price }} ₴</p>
+    <button class="btn">Купити</button>
+  </div>
+  </div>
+
 </div>
 {% endblock %}
 
@@ -33,5 +41,6 @@
   <div class="modal">
     <input class="input" type="text" placeholder="Номер телефона" value="+" />
     <button class="btn">Відправити</button>
+  </div>
 </div>
 {% endblock %}

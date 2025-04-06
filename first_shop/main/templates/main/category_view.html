@@ -8,7 +8,11 @@
 {% endblock %}
 
 <div class="content">
-  <h1 class="title">Магазин для маленьких друзів</h1>
+  <ul class="breadcrumbs">
+    <li><a href="{% url 'main' %}">Головна</a>/</li>
+    <li>{{category.name}}</li>
+  </ul>
+  <h1 class="title">{{ category.name }}</h1>
   <div class="categories">
     <img src="{% static 'main/images/dogs.webp' %}" alt="Doggy" />
     <ul class="list">
@@ -21,7 +25,7 @@
   </div>
 
   <div class="products">
-    {% for link, product in products.items %}
+    {% for link, product in products.items %} {% if link in category.products %}
     <div class="product">
       <a href="{% url 'product_view' slag=link %}">
         {% if product.img %}
@@ -38,12 +42,10 @@
       <p class="price">{{ product.price }} ₴</p>
       <button class="btn">Купити</button>
     </div>
-    {% endfor %}
+    {% endif %} {% endfor %}
   </div>
 </div>
-{% endblock %}
-
-{% block modals %}
+{% endblock %} {% block modals %}
 <div class="bg">
   <div class="modal">
     <input class="input" type="text" placeholder="Номер телефона" value="+" />
