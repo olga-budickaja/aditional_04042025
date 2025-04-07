@@ -45,66 +45,66 @@ products = {
     "5": {
         "name": "Корм для котів преміум",
         "price": 349,
-        "img": ""
+        "img": "https://images.avrora.ua/images/detailed/89/103909_001.jpg"
     },
     "6": {
         "name": "Когтеточка",
         "price": 229,
-        "img": ""
+        "img": "https://images.avrora.ua/images/thumbnails/586/461/detailed/63/95289_001.webp"
     },
     "7": {
         "name": "Іграшка-м'ячик з м'ятою",
         "price": 75,
-        "img": ""
+        "img": "https://images.avrora.ua/images/companies/1/SEO/myaki-igrashki/myaki-igrashki-page-1.png?1692045923683"
     },
     "8": {
         "name": "Туалет для кота",
         "price": 199,
-        "img": ""
+        "img": "https://images.avrora.ua/images/detailed/88/2429_112.jpg"
     },
     "9": {
         "name": "Корм для папуг",
         "price": 120,
-        "img": ""
+        "img": "https://images.avrora.ua/images/detailed/77/100134_001.jpg"
     },
     "10": {
         "name": "Клітка для птахів",
         "price": 599,
-        "img": ""
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjR46D-6NXxEmxyNH-I58n4XhUa-w23WJCdA&s"
     },
     "11": {
         "name": "Іграшка-дзвіночок",
         "price": 45,
-        "img": ""
+        "img": "https://images.avrora.ua/images/companies/1/SEO/dityachi-igrashki/dityachi-igrashki-page-1.png?1690410362062"
     },
     "12": {
         "name": "Корм для тропічних риб",
         "price": 99,
-        "img": ""
+        "img": "https://img2.zakaz.ua/f6cb9e13d8344a38870b628f080b9807/1715135677-s350x350.jpg"
     },
     "13": {
         "name": "Акваріум 30л",
         "price": 799,
-        "img": ""
+        "img": "https://content1.rozetka.com.ua/goods/images/big_tile/480456044.jpg"
     },
     "14": {
         "name": "Фільтр для акваріума",
         "price": 299,
-        "img": ""
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkuWpL5grG2ubUdVN03MwrOP6rWrT0bc0zHg&s"
     },
     "15": {
         "name": "Корм для хом'яків",
         "price": 90,
-        "img": ""
+        "img": "https://images.avrora.ua/images/detailed/77/100132_001.jpg"
     },
     "16": {
         "name": "Колесо для бігу",
         "price": 110,
-        "img": ""
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlRsbWU1dhJO1T2PgNFCO_r3XL-boi6EfUtQ&s"
     },
     "17": {
         "name": "Клітка для гризунів",
         "price": 450,
-        "img": ""
+        "img": "https://cdn.27.ua/sc--media--prod/default/54/85/58/548558ae-8b09-420d-81b1-d73244f22bc0.png"
     }
 }
