@@ -16,20 +16,20 @@
   <div class="categories">
     <img src="{% static 'main/images/dogs.webp' %}" alt="Doggy" />
     <ul class="list">
-      {% for link, category in categories.items %}
+      {% for category in categories %}
       <li class="item">
-        <a href="/category/{{ link }}">{{ category.name }}</a>
+        <a href="/category/{{ category.id }}">{{ category.name }}</a>
       </li>
       {% endfor %}
     </ul>
   </div>
 
   <div class="products">
-    {% for link, product in products.items %} {% if link in category.products %}
+    {% for product in products %}
     <div class="product">
-      <a href="{% url 'product_view' slag=link %}">
-        {% if product.img %}
-        <img src="{{ product.img }}" alt="{{ product.name }}" class="img" />
+      <a href="{% url 'product_view' slag=product.id %}">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img" />
         {% else %}
         <img
           src="{% static 'main/images/no-image.webp' %}"
@@ -42,7 +42,7 @@
       <p class="price">{{ product.price }} ₴</p>
       <button class="btn">Купити</button>
     </div>
-    {% endif %} {% endfor %}
+    {% endfor %}
   </div>
 </div>
 {% endblock %} {% block modals %}

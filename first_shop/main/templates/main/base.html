@@ -18,7 +18,9 @@
   </head>
   <body>
     <header>
-      <img src="{% static 'main/images/logo.png' %}" width="180px" alt="logo" />
+      <a href="{% url 'main' %}">
+        <img src="{% static 'main/images/logo.png' %}" width="180px" alt="logo" />
+      </a>
       <div class="menu">
         <nav>
           <a href="{% url 'main' %}">Головна</a>

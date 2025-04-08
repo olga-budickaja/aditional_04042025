@@ -1,13 +1,10 @@
 {% extends 'main/base.html' %}
 {% block content %}
-{% load static %}
-
-{% block extra_css %}
+{% load static %} {% block extra_css %}
 <link rel="stylesheet" href="{% static 'main/css/index.css' %}" />
 <link rel="stylesheet" href="{% static 'main/css/product_page.css' %}" />
 <script src="{% static 'main/js/modal.js'%}" defer></script>
 {% endblock %}
-
 
 <div class="product_page">
   <ul class="breadcrumbs">
@@ -15,9 +12,8 @@
     <li>{{product.name}}</li>
   </ul>
   <div class="product_wrap">
-      <div class="image">
-    {% if product.img %}
-    <img src="{{ product.img }}" alt="{{ product.name }}" class="img" />
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img" />
     {% else %}
     <img
       src="{% static 'main/images/no-image.webp' %}"
@@ -25,18 +21,28 @@
       class="img"
     />
     {% endif %}
-  </div>
-  <div class="content_page">
+      <div class="content_page">
     <h1 class="title">{{ product.name }}</h1>
     <p class="price">{{ product.price }} ₴</p>
     <button class="btn">Купити</button>
   </div>
-  </div>
-
 </div>
-{% endblock %}
-
-{% block modals %}
+<div class="product_desc">
+  <h2 class="subtitle">Опис товару</h2>
+  <p>{{ product.description }}</p>
+</div>
+<div class="product_attrs">
+  <h2 class="subtitle">Характеристики</h2>
+  <table class="attributes-table">
+    {% for attr in attributes %}
+    <tr>
+      <td class="attr-name">{{ attr.name }}:</td>
+      <td class="attr-value">{{ attr.value }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %} {% block modals %}
 <div class="bg">
   <div class="modal">
     <input class="input" type="text" placeholder="Номер телефона" value="+" />

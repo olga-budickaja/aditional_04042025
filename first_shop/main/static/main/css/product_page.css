@@ -27,3 +27,19 @@
   font-size: 28px;
   font-weight: 700;
 }
+.product_desc p {
+  color: gray;
+}
+.attributes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.attributes-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+.attributes-table .attr-name {
+  color: gray;
+  width: 40%;
+}

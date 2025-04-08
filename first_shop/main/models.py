@@ -24,3 +24,19 @@ class Product(BaseModel):
 
     def __str__(self):
         return f'{self.name} ({self.id})'
+
+class Category(BaseModel):
+    name = models.CharField(max_length=150)
+    products = models.ManyToManyField(Product, related_name="categories", blank=True)
+
+    def __str__(self):
+        return self.name
+
+class ProductAttrs(BaseModel):
+    name = models.CharField(max_length=150)
+    value = models.CharField(max_length=255)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name="attributes")
+
+class Ads(BaseModel):
+    text = models.CharField(max_length=512)

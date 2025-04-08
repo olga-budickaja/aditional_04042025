@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from main import views
 
@@ -6,3 +8,6 @@ urlpatterns = [
     path('product/<slag>', views.product_view, name='product_view'),
     path('category/<slag>', views.category_view, name='category_view'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

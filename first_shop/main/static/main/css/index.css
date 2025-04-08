@@ -4,6 +4,9 @@
   color: #ffcf27;
   text-transform: uppercase;
 }
+.subtitle {
+  font-weight: 500;
+}
 .categories {
   display: flex;
   gap: 40px;
