@@ -1,6 +1,6 @@
 from math import atan
 from django.http import HttpRequest
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from main.utils import pagination
 from main.models import Product, Category, ProductAttrs
 
