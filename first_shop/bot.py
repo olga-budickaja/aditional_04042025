@@ -40,7 +40,7 @@ async def start(update: Update, context: CallbackContext):
             f'З поверненням, {admin.first_name}! 👋'
         )
 
-async def send_order_message(update: Update, context: CallbackContext, name, phone, product_name, product_price, product_image):
+async def send_order_message(name, phone, product_name, product_price, product_image):
     message = (
         f"Нове замовлення:\n"
         f"Ім'я: {name}\n"
@@ -50,7 +50,7 @@ async def send_order_message(update: Update, context: CallbackContext, name, pho
         f"Зображення продукту: {product_image if product_image else 'Немає зображення'}\n"
     )
 
-    await update.message.reply_text(message)
+    return await message
 
 
 def main():

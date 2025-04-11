@@ -77,17 +77,11 @@ def create_order(request: HttpRequest):
         phone = request.POST.get("phone")
         product_id = request.POST.get("product_id")
 
-        print(f'name: {name}')
-        print(f'phone: {phone}')
-        print(f'product_id: {product_id}')
-
         if name and phone and product_id:
             try:
                 product = Product.objects.get(id=product_id)
                 product_price = product.price
                 product_image_url = product.image.url if product.image else None
-                print(f"product_price {product_price}")
-                print(f"product_image_url {product_image_url}")
             except Product.DoesNotExist:
                 return redirect('product_view', slag=product_id)
 

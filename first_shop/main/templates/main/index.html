@@ -44,11 +44,36 @@
 {% endblock %}
 
 {% block modals %}
-<div class="bg">
-  <div class="modal">
-    <input class="input" name="name" type="text" placeholder="Введіть ваше ім'я" />
-    <input class="input" name="phone" type="text" placeholder="Введіть номер телефона" value="+380999999999" />
-    <button class="btn">Відправити</button>
+  <div class="bg">
+    <div class="modal">
+      <form
+        action="{% url 'create_order' %}"
+        method="post"
+        enctype="multipart/form-data"
+        class="form"
+      >
+        {% csrf_token %}
+        <input
+          class="input"
+          name="name"
+          type="text"
+          placeholder="Введіть ваше ім'я"
+        />
+        <input
+          type="hidden"
+          class="form_control"
+          name="product_id"
+          value="{{ product.id }}"
+        />
+        <input
+          class="input"
+          name="phone"
+          type="text"
+          placeholder="Введіть номер телефона"
+          value="+380999999999"
+        />
+        <button type="submit" class="btn">Відправити</button>
+      </form>
+    </div>
   </div>
-</div>
-{% endblock %}
+  {% endblock %}
