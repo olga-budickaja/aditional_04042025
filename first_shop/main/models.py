@@ -67,7 +67,6 @@ class Order(BaseModel):
     phone = models.CharField(
     max_length=13,
     validators=[phone_validator],
-    unique=True,
     verbose_name="Телефон"
     )
     name = models.CharField(max_length=100)

@@ -50,8 +50,10 @@ async def send_order_message(name, phone, product_name, product_price, product_i
         f"Зображення продукту: {product_image if product_image else 'Немає зображення'}\n"
     )
 
-    return await message
+    return await print_message(message)
 
+async def print_message(update: Update, context: CallbackContext, message):
+    return await update.message.reply_text(message)
 
 def main():
     load_dotenv()
@@ -59,6 +61,7 @@ def main():
 
     app = ApplicationBuilder().token(token).build()
     app.add_handler(CommandHandler("start", start))
+    app.add_handler(print_message)
 
     app.run_polling()
 
