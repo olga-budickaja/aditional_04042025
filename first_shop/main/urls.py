@@ -7,6 +7,8 @@ urlpatterns = [
     path('', views.main, name='main'),
     path('product/<slag>', views.product_view, name='product_view'),
     path('category/<slag>', views.category_view, name='category_view'),
+    path("create_comment/", views.create_comment, name="create_comment"),
+    path("create_order/", views.create_order, name="create_order"),
 ]
 
 if settings.DEBUG:

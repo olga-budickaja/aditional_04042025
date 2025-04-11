@@ -1,9 +1,14 @@
 {% extends 'main/base.html' %}
 {% block content %}
-{% load static %} {% block extra_css %}
+
+{% load static %}
+
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'main/css/index.css' %}" />
 <link rel="stylesheet" href="{% static 'main/css/product_page.css' %}" />
+<link rel="stylesheet" href="{% static 'main/css/form.css' %}" />
 <script src="{% static 'main/js/modal.js'%}" defer></script>
+<script src="{% static 'main/js/tab.js'%}" defer></script>
 {% endblock %}
 
 <div class="product_page">
@@ -21,32 +26,138 @@
       class="img"
     />
     {% endif %}
-      <div class="content_page">
-    <h1 class="title">{{ product.name }}</h1>
-    <p class="price">{{ product.price }} ₴</p>
-    <button class="btn">Купити</button>
+    <div class="content_page">
+      <h1 class="title">{{ product.name }}</h1>
+      <p class="price">{{ product.price }} ₴</p>
+      <button class="btn">Купити</button>
+    </div>
   </div>
-</div>
-<div class="product_desc">
-  <h2 class="subtitle">Опис товару</h2>
-  <p>{{ product.description }}</p>
-</div>
-<div class="product_attrs">
-  <h2 class="subtitle">Характеристики</h2>
-  <table class="attributes-table">
-    {% for attr in attributes %}
-    <tr>
-      <td class="attr-name">{{ attr.name }}:</td>
-      <td class="attr-value">{{ attr.value }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-{% endblock %} {% block modals %}
-<div class="bg">
-  <div class="modal">
-    <input class="input" type="text" placeholder="Номер телефона" value="+" />
-    <button class="btn">Відправити</button>
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="desc">Опис товару</button>
+      <button class="tab-btn" data-tab="attrs">Характеристики</button>
+      <button class="tab-btn" data-tab="comments">Коментарі</button>
+    </div>
+
+    <div class="tab-content active" id="desc">
+      <h2 class="subtitle">Опис товару</h2>
+      <p>{{ product.description }}</p>
+    </div>
+
+    <div class="tab-content" id="attrs">
+      <h2 class="subtitle">Характеристики</h2>
+      <table class="attributes-table">
+        {% for attr in attributes %}
+        <tr>
+          <td class="attr-name">{{ attr.name }}:</td>
+          <td class="attr-value">{{ attr.value }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="tab-content" id="comments">
+      <h2 class="subtitle">Коментарі</h2>
+      {% for comment in product.comments.all %}
+      <div class="product_comment">
+        <div class="comment_header">
+          {% if comment.author %}
+          <h3 class="comment_author">{{ comment.author }}</h3>
+          {% else %}
+          <h3 class="comment_author">Анонім</h3>
+          {% endif %}
+          <span class="subtitle">{{ comment.created_at }}</span>
+        </div>
+        <div class="comment_content">
+          <div class="comment_image">
+            {% if comment.image %}
+            <img src="{{ comment.image.url }}" alt="Малюнок до коментарію" />
+            {% else %}
+            <img
+              src="{% static 'main/images/no_image_comment.png' %}"
+              alt="{{ product.name }}"
+              class="img"
+            />
+            {% endif %}
+          </div>
+          <div class="comment_text">{{comment.text}}</div>
+        </div>
+      </div>
+      {% endfor %}
+      <h2 class="subtitle">Додати коментар</h2>
+      <form
+        action="{% url 'create_comment' %}"
+        method="post"
+        enctype="multipart/form-data"
+        class="form"
+      >
+        {% csrf_token %}
+        <input
+          name="author"
+          type="text"
+          class="form_control"
+          placeholder="Введіть своє ім'я (необов'язково)"
+        />
+        <textarea
+          name="text"
+          class="form_control"
+          placeholder="Введіть коментар"
+        ></textarea>
+        <input
+          type="hidden"
+          class="form_control"
+          name="product_id"
+          value="{{product.id}}"
+        />
+        <div class="form_buttons">
+          <label for="file_upload" class="btn_round">
+            <span>📂</span>
+            <input
+              type="file"
+              name="image"
+              id="file_upload"
+              class="form_file"
+            />
+          </label>
+          <button type="reset" class="btn_round">🔃</button>
+          <button type="submit" class="btn_round">📩</button>
+        </div>
+      </form>
+    </div>
   </div>
+
+  {% endblock %} {% block modals %}
+  <div class="bg">
+    <div class="modal">
+      <form
+        action="{% url 'create_order' %}"
+        method="post"
+        enctype="multipart/form-data"
+        class="form"
+      >
+        {% csrf_token %}
+        <input
+          class="input"
+          name="name"
+          type="text"
+          placeholder="Введіть ваше ім'я"
+        />
+        <input
+          type="hidden"
+          class="form_control"
+          name="product_id"
+          value="{{ product.id }}"
+        />
+        <input
+          class="input"
+          name="phone"
+          type="text"
+          placeholder="Введіть номер телефона"
+          value="+380999999999"
+        />
+        <button type="submit" class="btn">Відправити</button>
+      </form>
+    </div>
+  </div>
+  {% endblock %}
 </div>
-{% endblock %}

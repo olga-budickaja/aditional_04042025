@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form_control {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+}
+.form_control:focus {
+  border-color: #ffcf27;
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(224, 193, 16, 0.2);
+}
+textarea.form_control {
+  min-height: 150px;
+}
+.form_buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+.form_file {
+  display: none;
+}

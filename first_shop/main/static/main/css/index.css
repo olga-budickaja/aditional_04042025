@@ -25,6 +25,10 @@
   padding: 5px 20px;
   border-radius: 20px;
   background-color: rgba(245, 245, 233, 0.8);
+  transition: background-color 0.3s;
+}
+.item:hover {
+  background-color: #ffcf27;
 }
 .products {
   display: flex;
@@ -69,6 +73,26 @@
   height: 40px;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn_round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  min-height: 60px;
+  background-color: rgba(224, 193, 16, 0.2);
+  border-radius: 100%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+.btn_round:hover,
+.btn:hover {
+  background-color: #e91745;
+  color: white;
 }
 .bg {
   display: none;
@@ -90,6 +114,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
   width: 400px;
   height: 300px;
   border-radius: 10px;

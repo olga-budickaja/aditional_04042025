@@ -9,7 +9,7 @@
   gap: 40px;
   margin-top: 60px;
 }
-.product_wrap .image {
+.product_wrap img {
   flex: 1;
   width: 100%;
 }
@@ -42,4 +42,84 @@
 .attributes-table .attr-name {
   color: gray;
   width: 40%;
+}
+/* TABS */
+.tabs {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab-btn {
+  background-color: #eee;
+  border: none;
+  padding: 5px 20px;
+  border-radius: 20px;
+  background-color: rgba(245, 245, 233, 0.8);
+  font-family: "Comic Neue", cursive;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.tab-btn.active {
+  background-color: #ffcf27;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.attributes-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attributes-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+/* COMMENTS */
+.product_comment {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin: 15px 0;
+}
+.comment_header {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: gray;
+}
+.comment_author {
+  margin: 0;
+  position: 0;
+  line-height: 0;
+}
+.comment_content {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.comment_image {
+  width: 100px;
+  height: 100px;
+}
+.comment_image img {
+  max-width: 100%;
+  object-fit: cover;
 }
