@@ -25,7 +25,11 @@
     <div class="product">
       <a href="{% url 'product_view' slag=product.id %}">
         {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img" />
+        <img
+          src="{{ product.image.url }}"
+          alt="{{ product.name }}"
+          class="img"
+        />
         {% else %}
         <img
           src="{% static 'main/images/no-image.webp' %}"
@@ -36,44 +40,11 @@
         <h3 class="name">{{ product.name }}</h3>
       </a>
       <p class="price">{{ product.price }} ₴</p>
-      <button class="btn">Купити</button>
+      <a href="{% url 'product_view' slag=product.id %}">
+        <button class="btn">Купити</button>
+      </a>
     </div>
     {% endfor %}
   </div>
 </div>
 {% endblock %}
-
-{% block modals %}
-  <div class="bg">
-    <div class="modal">
-      <form
-        action="{% url 'create_order' %}"
-        method="post"
-        enctype="multipart/form-data"
-        class="form"
-      >
-        {% csrf_token %}
-        <input
-          class="input"
-          name="name"
-          type="text"
-          placeholder="Введіть ваше ім'я"
-        />
-        <input
-          type="hidden"
-          class="form_control"
-          name="product_id"
-          value="{{ product.id }}"
-        />
-        <input
-          class="input"
-          name="phone"
-          type="text"
-          placeholder="Введіть номер телефона"
-          value="+380999999999"
-        />
-        <button type="submit" class="btn">Відправити</button>
-      </form>
-    </div>
-  </div>
-  {% endblock %}
