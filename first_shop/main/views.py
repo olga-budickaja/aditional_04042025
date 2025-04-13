@@ -1,8 +1,8 @@
-from math import atan
-from django.forms import ImageField
+import os
+import threading
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
-from bot import send_order_message
+from config.settings import BASE_DIR, BOT, CHAT_ID, MEDIA_ROOT
 from main.forms.comment_form import CommentCreateForm
 from main.utils import pagination
 from main.models import Comment, Order, Product, Category, ProductAttrs
@@ -76,12 +76,14 @@ def create_order(request: HttpRequest):
         name = request.POST.get("name")
         phone = request.POST.get("phone")
         product_id = request.POST.get("product_id")
+        image_none = os.path.join(BASE_DIR, 'main', 'static', 'main', 'images', 'no-image.png')
 
         if name and phone and product_id:
             try:
                 product = Product.objects.get(id=product_id)
+                product_name = product.name
                 product_price = product.price
-                product_image_url = product.image.url if product.image else None
+                product_image_url = product.image.url if product.image else image_none
             except Product.DoesNotExist:
                 return redirect('product_view', slag=product_id)
 
@@ -91,7 +93,29 @@ def create_order(request: HttpRequest):
                 product_id=product,
             )
 
-            send_order_message(name, phone, product.name, product_price, product_image_url)
+            image_path = os.path.join(BASE_DIR, product_image_url.lstrip('/'))
+            print(f"PATH: {product_image_url}")
+            print(f"PATH1: {image_path}")
+
+            text_message = (
+                f"Нове замовлення: {product}:\n"
+                f"від {name}:\n"
+                f"телефон: {phone}:\n"
+                f"Товар: {product_name}\n"
+                f"Ціна: {product_price} грн"
+            )
+            threading.Thread(
+                target=send_photo_async,
+                args=(CHAT_ID, image_path, text_message),
+                daemon=True
+            ).start()
 
 
     return redirect('product_view', slag=product_id)
+
+def send_photo_async(chat_id, photo_path, caption):
+    with open(photo_path, "rb") as photo:
+        try:
+            BOT.send_photo(chat_id=chat_id, photo=photo, caption=caption, timeout=60)
+        except Exception as e:
+            print(f"❌ Помилка надсилання фото: {e}")
