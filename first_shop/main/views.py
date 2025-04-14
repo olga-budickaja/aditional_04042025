@@ -2,7 +2,7 @@ import os
 import threading
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
-from config.settings import BASE_DIR, BOT, CHAT_ID, MEDIA_ROOT
+from config.settings import BASE_DIR, BOT, CHAT_ID
 from main.forms.comment_form import CommentCreateForm
 from main.utils import pagination
 from main.models import Comment, Order, Product, Category, ProductAttrs

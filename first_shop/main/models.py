@@ -1,6 +1,10 @@
+import os
 import random
+from tabnanny import verbose
 from django.db import models
 from django.core.validators import RegexValidator
+
+from config.settings import BASE_DIR
 
 
 phone_validator = RegexValidator(
@@ -16,13 +20,14 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+
 class Product(BaseModel):
-    name = models.CharField(max_length=255)
-    price = models.FloatField()
-    is_top = models.BooleanField(default=False)
-    is_new = models.BooleanField(default=False)
-    image = models.ImageField(upload_to="products/images", blank=True, null=True)
-    description = models.TextField()
+    name = models.CharField(max_length=255, verbose_name="Назва")
+    price = models.FloatField(verbose_name="Ціна")
+    is_top = models.BooleanField(default=False, verbose_name="Топ продажів")
+    is_new = models.BooleanField(default=False, verbose_name="Новинка")
+    image = models.ImageField(upload_to="products/images", blank=True, null=True, verbose_name="Фото")
+    description = models.TextField(verbose_name="Опис")
 
     def random_discount(self):
         if random.randint(0,1):
@@ -32,36 +37,46 @@ class Product(BaseModel):
     def __str__(self):
         return f'{self.name} ({self.id})'
 
+    class Meta:
+        verbose_name = "Товар"
+        verbose_name_plural = "Товари"
+
+
 class Category(BaseModel):
-    name = models.CharField(max_length=150)
-    products = models.ManyToManyField(Product, related_name="categories", blank=True)
+    name = models.CharField(max_length=150, verbose_name="Назва")
+    products = models.ManyToManyField(Product, related_name="categories", blank=True, verbose_name="Товари")
 
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Категорія"
+        verbose_name_plural = "Категорії"
+
 class ProductAttrs(BaseModel):
-    name = models.CharField(max_length=150)
-    value = models.CharField(max_length=255)
+    name = models.CharField(max_length=150, verbose_name="Назва")
+    value = models.CharField(max_length=255, verbose_name="Значення")
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
-                                related_name="attributes")
+                                related_name="attributes", verbose_name="Товар")
+
+    class Meta:
+        verbose_name = "Атрибут"
+        verbose_name_plural = "Атрибути"
 
 class Ads(BaseModel):
     text = models.CharField(max_length=512)
 
+
 class Comment(BaseModel):
-    author = models.CharField(max_length=150, blank=True, null=True)
-    text = models.TextField()
+    author = models.CharField(max_length=150, blank=True, null=True, verbose_name="Автор")
+    text = models.TextField(verbose_name="Текст")
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE,
                                     related_name="comments")
-    image = models.ImageField(upload_to="comments/images", blank=True, null=True)
+    image = models.ImageField(upload_to="comments/images", blank=True, null=True, verbose_name="Фото")
 
-class AdminData(BaseModel):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    username = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.first_name
+    class Meta:
+        verbose_name = "Коментар"
+        verbose_name_plural = "Коментарі"
 
 class Order(BaseModel):
     phone = models.CharField(
@@ -69,7 +84,7 @@ class Order(BaseModel):
     validators=[phone_validator],
     verbose_name="Телефон"
     )
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name="Ім'я")
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE,
                                     related_name="orders")
 
@@ -84,3 +99,7 @@ class Order(BaseModel):
     @property
     def product_image(self):
         return self.product_id.image.url if self.product_id.image else None
+
+    class Meta:
+        verbose_name = "Замовлення"
+        verbose_name_plural = "Замовлення"
